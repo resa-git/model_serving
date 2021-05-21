@@ -4,17 +4,18 @@ from numpy import loadtxt
 import numpy as np
 from tensorflow.keras.models import model_from_json
 from tensorflow.keras.models import Sequential
+import tensorflow as tf
 
 model_json_file = './model.json'
 model_weights_file = './model.h5'
 data_file = './pima-indians-diabetes.csv'
 
 def load_data():
-    dataset =  loadtxt(data_file, delimiter=',')
-    X = dataset[:,0:8]
-    y = dataset[:,8]
-    y = list(map(int, y))
-    y = np.asarray(y, dtype=np.uint8)
+    dataset =  loadtxt(data_file, delimiter=',', skiprows=1)
+    X = dataset[:,0:7]
+    y = dataset[:,7]
+    #y = list(map(int, y))
+    #y = np.asarray(y, dtype=np.uint8)
     return X, y
 
 def load_model():
@@ -43,7 +44,7 @@ def get_predictions():
     results ={}
     X, y = load_data()
     loaded_model = load_model()
-    predictions = loaded_model.predict_classes(X)
+    predictions = loaded_model.predict(X)
     results['y'] = y.tolist()
     results['predicted'] =[]
     #print ('results[y]:', results['y'])
@@ -57,9 +58,9 @@ def get_predictions():
 def get_accuracy():
     X, y = load_data()
     loaded_model = load_model()
-    loaded_model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+    loaded_model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 
     score = loaded_model.evaluate(X, y, verbose=0)
     #print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
-    return score[1]*100
+    return score[1]
 

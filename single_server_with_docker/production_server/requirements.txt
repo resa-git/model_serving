@@ -1,6 +1,0 @@
-Flask
-amqp
-celery
-keras
-tensorflow
-future
