@@ -2,6 +2,7 @@ from celery import Celery
 
 from numpy import loadtxt
 import numpy as np
+import pickle
 from tensorflow.keras.models import model_from_json
 from tensorflow.keras.models import Sequential
 import tensorflow as tf
@@ -20,13 +21,15 @@ def load_data():
 
 def load_model():
     # load json and create model
-    json_file = open(model_json_file, 'r')
-    loaded_model_json = json_file.read()
-    json_file.close()
-    loaded_model = model_from_json(loaded_model_json)
+    #json_file = open(model_json_file, 'r')
+    #loaded_model_json = json_file.read()
+    #json_file.close()
+    #loaded_model = model_from_json(loaded_model_json)
     # load weights into new model
-    loaded_model.load_weights(model_weights_file)
+    #loaded_model.load_weights(model_weights_file)
     #print("Loaded model from disk")
+    filename = "final_model.sav"
+    loaded_model = pickle.load(open(filename, "rb"))
     return loaded_model
 
 # Celery configuration
