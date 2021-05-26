@@ -4,3 +4,4 @@ celery
 keras
 tensorflow
 future
+scikit-learn
