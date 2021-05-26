@@ -17,7 +17,6 @@ def index():
 
 @app.route("/accuracy", methods=['POST', 'GET'])
 def accuracy():
-    print("ACCCCCCCCS")
     if request.method == 'POST':
         r = get_accuracy.delay()
         a = r.get()
@@ -29,14 +28,11 @@ def accuracy():
 
 @app.route("/predictions", methods=['POST', 'GET'])
 def predictions():
-    print("PREEDS")   
     if request.method == 'POST':
-        print("wE IN")
         results = get_predictions()
         print(results)
         #predictions = results.get()
         
-        print("DDDDD")
         #results = get_accuracy.delay()
         #accuracy = results.get()
         accuracy = 0
