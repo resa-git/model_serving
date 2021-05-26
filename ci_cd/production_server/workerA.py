@@ -5,11 +5,12 @@ import numpy as np
 import pickle
 from tensorflow.keras.models import model_from_json
 from tensorflow.keras.models import Sequential
+from sklearn.metrics import r2_score
 import tensorflow as tf
 
 model_json_file = './model.json'
 model_weights_file = './model.h5'
-data_file = './pima-indians-diabetes.csv'
+data_file = './stargazer.csv'
 
 def load_data():
     dataset =  loadtxt(data_file, delimiter=',', skiprows=1)
@@ -53,7 +54,7 @@ def get_predictions():
     #print ('results[y]:', results['y'])
     for i in range(len(results['y'])):
         #print('%s => %d (expected %d)' % (X[i].tolist(), predictions[i], y[i]))
-        results['predicted'].append(predictions[i].tolist()[0])
+        results['predicted'].append(predictions[i])
     #print ('results:', results)
     return results
 
@@ -61,9 +62,10 @@ def get_predictions():
 def get_accuracy():
     X, y = load_data()
     loaded_model = load_model()
-    loaded_model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
+    #loaded_model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 
-    score = loaded_model.evaluate(X, y, verbose=0)
+    score = r2_score(X, y)
     #print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
     return score[1]
 
+print(get_predictions())
