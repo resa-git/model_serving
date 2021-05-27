@@ -29,14 +29,12 @@ def accuracy():
 @app.route("/predictions", methods=['POST', 'GET'])
 def predictions():
     if request.method == 'POST':
-        results = get_predictions()
-        print(results)
+        final_results = get_predictions()
         #predictions = results.get()
         
-        #results = get_accuracy.delay()
+        accuracy = get_accuracy(final_results["predicted"])
         #accuracy = results.get()
-        accuracy = 0
-        final_results = results
+      
         #print(final_results['y'])
         return render_template('result.html', accuracy=accuracy ,final_results=final_results) 
                     
