@@ -73,13 +73,12 @@ elif max_mlp == max(max_list):
 elif max_linear == max(max_list):
     model = linear_model
 
-print("The best model had params")
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.5, random_state=42)
 model.fit(X_train,y_train)
 pred = model.predict(X_test)
 score = r2_score(y_test, pred)
-print("R2 score for the best model" + str(score))
 #create this folder if it does not exist
+print("uploading best model")
 filename = "/home/appuser/jump/final.sav"
 pickle.dump(model, open(filename, 'wb'))
 
