@@ -3,5 +3,5 @@ ADD requirements.txt /app/requirements.txt
 WORKDIR /app/
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
-CMD ["./tuning.py","--host=0.0.0.0"]
+CMD ["./tuning.py"]
 

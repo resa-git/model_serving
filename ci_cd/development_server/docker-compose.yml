@@ -1,6 +1,9 @@
 version: "3"
 services:
   dev:
-    build:
-      context: .
-    hostname: worker_1
+  build:
+    context: .
+    dockerfile: Dockerfile
+  restart: always
+  volumes:
+    - .:/app
