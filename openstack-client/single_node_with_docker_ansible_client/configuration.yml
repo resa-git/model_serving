@@ -36,6 +36,19 @@
       owner: appuser
       group: appuser
 
+- hosts: devserver
+  
+  tasks:
+    - name: Generate SSH keys
+      shell: ssh-keygen -b 2048 -f /home/appuser/.ssh/id_rsa -t rsa -q -N ""
+      args:
+        creates: /home/appuser/.ssh/id_rsa
+    - name: Copy Public Key Locally
+      fetch:
+        src: /home/appuser/.ssh/id_rsa.pub
+        dest: /tmp/
+        flat: yes
+
 - hosts: prodserver
  
   vars_files:
@@ -68,6 +81,28 @@
    - name: apt update
      apt: update_cache=yes upgrade=dist
      become: true
+
+   - name: Append Public key in authorized_keys file
+     authorized_key:
+       user: appuser
+       state: present
+       key: "{{ lookup('file', '/tmp/id_rsa.pub') }}"
+
+   - name: Create git jump directory
+     file:
+       path: /home/appuser/jump
+       state: directory
+
+   - name: Change cd to my_project and initialze empty git repo
+     command: chdir=/home/appuser/jump git init --bare
+
+   - name: Copy file with owner and permissions
+     ansible.builtin.copy:
+       src: /home/ubuntu/model_serving/ci_cd/production_server/post-receive
+       dest: /home/appuser/jump/hooks/post-receive
+
+   - name: change permissions
+    command: chmod +x /home/appuser/jump/hooks/post-receive
 
    - name: Install Docker  
      apt: pkg=docker-ce state=present update_cache=true allow_unauthenticated=yes
@@ -109,4 +144,15 @@
    - name: Install ML packages
      become: true
      pip: 
-      name: pandas, numpy
+      name: pandas, numpy, scikit-learn
+
+   - name: Create folder
+     file:
+       path: /home/appuser/jump
+       state: directory
+
+   - name: Create empty git repo
+     command: chdir=/home/appuser/jump git init
+
+   - name: Connect dev to prod server
+      command: chdir=/home/appuser/jump git remote add production appuser@192.168.2.101:/home/appuser/jump
