@@ -1,7 +1,5 @@
 Flask
 amqp
 celery
-future
-scikit-learn
 pandas
 numpy
