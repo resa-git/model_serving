@@ -82,6 +82,6 @@ print(pred)
 score = r2_score(y_test, pred)
 print(score)
 #create this folder if it does not exist
-filename = "/home/appuser/jump/final.sav"
+filename = "/home/appuser/jump/finalreally.sav"
 pickle.dump(model, open(filename, 'wb'))
 
