@@ -53,13 +53,13 @@ max_linear = cross_validate(linear_model, X,y,scoring="r2")["test_score"].mean()
 #df_linear = analysis_linear.results_df
 
 #max_rfc = df_rfc["score"].max()
-#print("Max for rfc: "+ str(max_rfc))
+print("Max for rfc: "+ str(max_rfc))
 #max_ada = df_ada["score"].max()
-#print("Max for ada: "+ str(max_ada))
+print("Max for ada: "+ str(max_ada))
 #max_mlp = df_mlp["score"].max()
-#print("Max for mlp: "+ str(max_mlp))
+print("Max for mlp: "+ str(max_mlp))
 #max_linear = df_linear["score"].max()
-#print("Max for linear: "+ str(max_linear))
+print("Max for linear: "+ str(max_linear))
 max_list = [max_rfc,max_mlp, max_ada, max_linear]
 
 model = None
