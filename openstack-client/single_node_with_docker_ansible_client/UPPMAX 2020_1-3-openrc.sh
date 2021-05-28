@@ -16,6 +16,8 @@ export OS_AUTH_URL=https://east-1.cloud.snic.se:5000/v3
 export OS_PROJECT_ID=e57a4042fb1a4f4e9caf1a2113431ed4
 export OS_PROJECT_NAME="UPPMAX 2020/1-3"
 export OS_USER_DOMAIN_NAME="snic"
+export OS_PROJECT_DOMAIN_NAME="snic"
+export OS_IDENTITY_API_VERSION="3"
 if [ -z "$OS_USER_DOMAIN_NAME" ]; then unset OS_USER_DOMAIN_NAME; fi
 export OS_PROJECT_DOMAIN_ID="5852c2232f1b43beaaee0b16d1e4a6b9"
 if [ -z "$OS_PROJECT_DOMAIN_ID" ]; then unset OS_PROJECT_DOMAIN_ID; fi

@@ -59,8 +59,8 @@ else:
 secgroups = ['default']
 
 print ("Creating instances ... ")
-instance_prod = nova.servers.create(name="group_21_prod_server", image=image, flavor=flavor, key_name='Group21Project',userdata=userdata_prod, nics=nics,security_groups=secgroups)
-instance_dev1 = nova.servers.create(name="group_21_dev_server_1", image=image, flavor=flavor, key_name='Group21Project',userdata=userdata_dev1, nics=nics,security_groups=secgroups)
+instance_prod = nova.servers.create(name="group_21_prod_server2", image=image, flavor=flavor, key_name='bestkey',userdata=userdata_prod, nics=nics,security_groups=secgroups)
+instance_dev1 = nova.servers.create(name="group_21_dev_server_2", image=image, flavor=flavor, key_name='bestkey',userdata=userdata_dev1, nics=nics,security_groups=secgroups)
 
 inst_status_prod = instance_prod.status
 inst_status_dev1 = instance_dev1.status
