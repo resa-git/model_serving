@@ -102,7 +102,3 @@
      apt: pkg=python3-pip state=latest update_cache=true  
      become: true
 
-   - name: Install ML packages
-     become: true
-     pip: 
-      name: numpy, sklearn, pandas, ray['tune']
