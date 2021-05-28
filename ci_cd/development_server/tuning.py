@@ -64,7 +64,7 @@ def linear_training(config):
     tune.report(score=score)
 
 
-ray.init(address='172.17.0.2:6379', _redis_password='5241590000000000')
+ray.init(address='auto')
 
 
 analysis_rfc = tune.run(
