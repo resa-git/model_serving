@@ -102,7 +102,7 @@
        dest: /home/appuser/jump/hooks/post-receive
 
    - name: change permissions
-    command: chmod +x /home/appuser/jump/hooks/post-receive
+     command: chmod +x /home/appuser/jump/hooks/post-receive
 
    - name: Install Docker  
      apt: pkg=docker-ce state=present update_cache=true allow_unauthenticated=yes
@@ -155,4 +155,4 @@
      command: chdir=/home/appuser/jump git init
 
    - name: Connect dev to prod server
-      command: chdir=/home/appuser/jump git remote add production appuser@192.168.2.101:/home/appuser/jump
+     command: chdir=/home/appuser/jump git remote add production appuser@192.168.2.101:/home/appuser/jump
