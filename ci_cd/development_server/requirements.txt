@@ -1,7 +1,4 @@
-Flask
-amqp
-celery
-keras
-tensorflow
-future
+ray['tune']
+pandas
+numpy
 scikit-learn

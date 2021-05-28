@@ -25,6 +25,7 @@
       repo: 'https://github.com/resa-git/model_serving.git'
       dest: /model_serving
       accept_hostkey: yes
+      force: yes
       
    - name: Change ownership of a directory
      become: true
