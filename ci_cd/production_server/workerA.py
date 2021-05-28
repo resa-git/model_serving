@@ -1,11 +1,8 @@
 from celery import Celery
 
 from numpy import loadtxt
-import numpy as np
 import pandas as pd
 import pickle
-from tensorflow.keras.models import model_from_json
-from tensorflow.keras.models import Sequential
 from sklearn.metrics import r2_score
 
 data_file = './test.csv'

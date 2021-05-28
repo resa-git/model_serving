@@ -2,4 +2,4 @@ Flask
 amqp
 celery
 pandas
-numpy
+scikit-learn
