@@ -141,17 +141,17 @@
      register: worker_token
      tags: swarm
 
-   #- name: Building containers
-   #  become: true
-   #  shell: docker build .
-   #  args: 
-   #   chdir: /model_serving/ci_cd/production_server
+   - name: Building containers
+     become: true
+     shell: docker build .
+     args: 
+      chdir: /model_serving/ci_cd/production_server
 
-   #- name: Running containers
-   #  become: true
-   #  shell: docker-compose up -d 
-   #  args: 
-   #   chdir: /model_serving/ci_cd/production_server 
+   - name: Running containers
+     become: true
+     shell: docker-compose up -d 
+     args: 
+      chdir: /model_serving/ci_cd/production_server 
 
 - hosts: devserver
   
