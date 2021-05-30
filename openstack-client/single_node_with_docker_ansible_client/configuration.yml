@@ -1,5 +1,9 @@
 - hosts: all
-  
+  vars_prompt:
+   - name: docker_user
+     private: no
+   - name: docker_pass
+     private: yes
   tasks:
    - name: Generate hosts file
      lineinfile: dest=/etc/hosts
@@ -34,6 +38,24 @@
       recurse: yes
       owner: appuser
       group: appuser
+   - name: Install pip3-pip
+     apt: pkg=python3-pip state=latest update_cache=true
+     become: true
+   
+   - name: Install python packages for ansible's docker module
+     become: yes
+     pip:
+      name: docker
+   - name: Log into private registry
+     become: yes
+     community.docker.docker_login:
+       username: "{{docker_user}}"
+       password: "{{docker_pass}}"
+   - name: Pull an image
+     become: yes
+     community.docker.docker_image:
+       name: resadocker/workers
+       source: pull
 
 - hosts: devserver
   
@@ -141,7 +163,7 @@
      register: worker_token
      tags: swarm
 
-   - name: Building containers
+   - name: Building containers 
      become: true
      shell: docker build .
      args: 
