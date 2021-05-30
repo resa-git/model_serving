@@ -13,7 +13,7 @@ flavor = "ssc.medium"
 private_net = "UPPMAX 2020/1-3 Internal IPv4 Network"
 floating_ip_pool_name = None
 floating_ip = None
-image_name = "ffecce9c-4c76-4fdc-ad76-ad1cc614f34c"
+image_name = "98c10a7f-2587-450b-866c-1266ea0dbe4b"
 
 identifier = random.randint(1000,9999)
 
@@ -49,31 +49,37 @@ if os.path.isfile(cfg_file_path):
 else:
     sys.exit("prod-cloud-cfg.txt is not in current working directory")
 
-cfg_file_path =  os.getcwd()+'/dev-cloud-cfg.txt'
-if os.path.isfile(cfg_file_path):
-    userdata_dev = open(cfg_file_path)
+cfg_file_path1 =  os.getcwd()+'/dev-cloud-cfg.txt'
+if os.path.isfile(cfg_file_path1):
+    userdata_dev1 = open(cfg_file_path1)
 else:
     sys.exit("dev-cloud-cfg.txt is not in current working directory")    
+
 
 secgroups = ['default']
 
 print ("Creating instances ... ")
-instance_prod = nova.servers.create(name="prod_server_reza", image=image, flavor=flavor, key_name='de_2',userdata=userdata_prod, nics=nics,security_groups=secgroups)
-instance_dev = nova.servers.create(name="dev_server_reza", image=image, flavor=flavor, key_name='de_2',userdata=userdata_dev, nics=nics,security_groups=secgroups)
+instance_prod = nova.servers.create(name="group_21_prod_server2", image=image, flavor=flavor, key_name='bestkey',userdata=userdata_prod, nics=nics,security_groups=secgroups)
+instance_dev1 = nova.servers.create(name="group_21_dev_server_2", image=image, flavor=flavor, key_name='bestkey',userdata=userdata_dev1, nics=nics,security_groups=secgroups)
+
 inst_status_prod = instance_prod.status
-inst_status_dev = instance_dev.status
+inst_status_dev1 = instance_dev1.status
+
 
 print ("waiting for 10 seconds.. ")
 time.sleep(10)
 
-while inst_status_prod == 'BUILD' or inst_status_dev == 'BUILD':
+while inst_status_prod == 'BUILD' or inst_status_dev1 == 'BUILD':
     print ("Instance: "+instance_prod.name+" is in "+inst_status_prod+" state, sleeping for 5 seconds more...")
-    print ("Instance: "+instance_dev.name+" is in "+inst_status_dev+" state, sleeping for 5 seconds more...")
+    print ("Instance: "+instance_dev1.name+" is in "+inst_status_dev1+" state, sleeping for 5 seconds more...")
+
     time.sleep(5)
     instance_prod = nova.servers.get(instance_prod.id)
     inst_status_prod = instance_prod.status
-    instance_dev = nova.servers.get(instance_dev.id)
-    inst_status_dev = instance_dev.status
+
+    instance_dev1 = nova.servers.get(instance_dev1.id)
+    inst_status_dev1 = instance_dev1.status
+
 
 ip_address_prod = None
 for network in instance_prod.networks[private_net]:
@@ -83,13 +89,13 @@ for network in instance_prod.networks[private_net]:
 if ip_address_prod is None:
     raise RuntimeError('No IP address assigned!')
 
-ip_address_dev = None
-for network in instance_dev.networks[private_net]:
+ip_address_dev1 = None
+for network in instance_dev1.networks[private_net]:
     if re.match('\d+\.\d+\.\d+\.\d+', network):
-        ip_address_dev = network
+        ip_address_dev1 = network
         break
-if ip_address_dev is None:
+if ip_address_dev1 is None:
     raise RuntimeError('No IP address assigned!')
 
 print ("Instance: "+ instance_prod.name +" is in " + inst_status_prod + " state" + " ip address: "+ ip_address_prod)
-print ("Instance: "+ instance_dev.name +" is in " + inst_status_dev + " state" + " ip address: "+ ip_address_dev)
+print ("Instance: "+ instance_dev1.name +" is in " + inst_status_dev1 + " state" + " ip address: "+ ip_address_dev1)

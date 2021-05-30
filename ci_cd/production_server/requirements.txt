@@ -1,6 +1,5 @@
 Flask
 amqp
 celery
-keras
-tensorflow
-future
+pandas
+scikit-learn
