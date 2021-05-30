@@ -1,0 +1,8 @@
+Instance: prod_server2_reza_ is in ACTIVE state ip address: 192.168.2.21
+Instance: dev_server2_reza_ is in ACTIVE state ip address: 192.168.2.208
+Instance: w1_server2_reza_ is in ACTIVE state ip address: 192.168.2.57
+Instance: w2_server2_reza_ is in ACTIVE state ip address: 192.168.2.253
+
+
+     ips_d:"{{hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+ 
