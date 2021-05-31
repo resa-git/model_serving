@@ -43,8 +43,8 @@ Please note that we have sometimes problem with pulling the image from dockerhub
 
 -------------- development server --------------<br/>
 To change the ML program, login to the devserver and go to the /model_serving/ci_cd/development_server/ and edit and run tuning_no_ray.py, then go to the ~/jump and run
-#git add final.sav
-#git commit 
-#git push production master
-Then the modified model is on the production server.
+#git add final.sav<br/>
+#git commit <br/>
+#git push production master<br/>
+Then the modified model is on the production server.<br/>
 
