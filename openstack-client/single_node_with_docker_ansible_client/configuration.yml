@@ -151,6 +151,7 @@
      when: swarm_status.rc != 0
      run_once: true
      tags: swarm
+     
    - name: Get the Manager join-token
      become: yes
      shell: docker swarm join-token --quiet manager
@@ -165,15 +166,10 @@
 
    - name: Building containers 
      become: true
-     shell: docker build .
+     shell: docker stack deploy -c docker-compose.yml stackdemo
      args: 
       chdir: /model_serving/ci_cd/production_server
 
-   - name: Running containers
-     become: true
-     shell: docker-compose up -d 
-     args: 
-      chdir: /model_serving/ci_cd/production_server 
 
 - hosts: devserver
   
