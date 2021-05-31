@@ -39,3 +39,12 @@ Edit web.ini and add the ip of the nodes<br/>
 <br/>
 Please note that we have sometimes problem with pulling the image from dockerhub production_server_web:latest and production_server_worker_1:latest, in this case we need to login manually into prod server and run<br/>
 #sudo docker stack deploy -c stack1.yaml stackdemo<br/>
+
+
+-------------- development server --------------<br/>
+To change the ML program, login to the devserver and go to the /model_serving/ci_cd/development_server/ and edit and run tuning_no_ray.py, then go to the ~/jump and run
+#git add final.sav
+#git commit 
+#git push production master
+Then the modified model is on the production server.
+
