@@ -37,5 +37,5 @@ Edit web.ini and add the ip of the nodes<br/>
 #ansible-playbook -i web.ini configuration.yml<br/>
 <br/>
 <br/>
-Please note that we have sometimes problem with pulling the image from dockerhub web_image:latest and workers:latest, in this case we need to login manually into prod server and run<br/>
+Please note that we have sometimes problem with pulling the image from dockerhub production_server_web:latest and production_server_worker_1:latest, in this case we need to login manually into prod server and run<br/>
 #sudo docker stack deploy -c stack1.yaml stackdemo<br/>
