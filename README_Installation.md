@@ -35,3 +35,7 @@ Edit information of start_instances.py
 Edit web.ini and add the ip of the nodes
 ---------------------- run ansible --------
 #ansible-playbook -i web.ini configuration.yml
+
+
+Please note that we have sometimes problem with pulling the image from dockerhub web_image:latest and workers:latest, in this case we need to login manually into prod server and run
+#sudo docker stack deploy -c stack1.yaml stackdemo
