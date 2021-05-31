@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    image: resadocker/web_image:latest
+    image: resadocker/production_server_web:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -22,7 +22,7 @@ services:
       - "5672:5672"
       - "15672:15672"
   worker_1:
-    image: resadocker/workers:latest
+    image: resadocker/production_server_worker_1:latest
     build:
       context: .
     hostname: worker_1
